@@ -1,27 +1,38 @@
 <?php
-class Mahasiswa {
-    public $nim;
-    public $nama;
-    public $programStudi;
+class mahasiswa
+{
+    private $nim, $nama, $matkul, $tgl_lahir;
+    protected $status;
+    public $umur;
 
-    function setData($nim, $nama, $programStudi) {
+    public function __construct()
+    {
+        $this->status = "Aktif";
+    }
+
+    public function setData($nim, $nama, $matkul, $tgl_lahir)
+    {
         $this->nim = $nim;
         $this->nama = $nama;
-        $this->programStudi = $programStudi;
+        $this->matkul = $matkul;
+        $this->tgl_lahir = $tgl_lahir;
+        $this->setUmur();
     }
 
-    function getData() {
-        return array(
-            'nim' => $this->nim,
-            'nama' => $this->nama,
-            'programStudi' => $this->programStudi
-        );
+    public function SetUmur()
+    {
+        $this->umur = date('Y') - substr($this->tgl_lahir, 0, 4);
     }
 
-    function tampilkanData() {
-        echo "NIM: " . $this->nim . "<br>";
-        echo "Nama: " . $this->nama . "<br>";
-        echo "Program Studi: " . $this->programStudi . "<br><br>";
+    public function getData()
+    {
+        return [
+            "nim" => $this->nim,
+            "nama" => $this->nama,
+            "matkul" => $this->matkul,
+            "tgl_lahir" => $this->tgl_lahir,
+            "umur" => $this->umur,
+            "status" => $this->status
+        ];
     }
 }
-?>
